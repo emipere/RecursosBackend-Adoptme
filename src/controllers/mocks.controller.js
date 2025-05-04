@@ -23,7 +23,7 @@ const crearMascotas = async (req, res) => {
 
    const generarDatos = async (req, res) => {
     const { users, pets } = req.body; 
-    console.log ("Los datos Recibidos son ", {users, pets});
+    console.log ("Los datos Recibidos ", {users, pets});
     try {
     
         const usuarios = await MockingService.generarUsuariosMocking(users);
