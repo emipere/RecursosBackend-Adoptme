@@ -4,6 +4,9 @@ import bcrypt from 'bcrypt';
 
 class MockingService {
     static async generarMascotasMocking(cantidad) {
+        if (typeof cantidad !== "number" || isNaN(cantidad)) {
+            throw new Error("La cantidad de mascotas debe ser un número.");
+        }
         const pets = [];
         for (let i = 0; i < cantidad; i++) {
             pets.push({
@@ -20,6 +23,9 @@ class MockingService {
 
     }
     static async generarUsuariosMocking(cantidad) {
+         if (typeof cantidad !== "number" || isNaN(cantidad)) {
+            throw new Error("La cantidad de usuarios debe ser un número.");
+        }
         const users = [];
         for (let i = 0; i < cantidad; i++) {
             users.push({
