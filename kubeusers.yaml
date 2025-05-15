@@ -1,0 +1,38 @@
+# apiVersion: apps/v1
+# kind: Deployment    
+# metadata:
+#   name: kubeadoptme
+# spec:
+#   replicas: 5 
+#   selector:
+#     matchLabels:
+#       app: recursosbackend-adoptme
+#   template:
+#     metadata:
+#       labels:
+#         app: recursosbackend-adoptme    
+#     spec:
+#       containers:
+#         - name: recursosbackend-adoptme
+#           image: emipere/proyecto-prueba:latest
+#           ports:
+#             - containerPort: 8080
+#           env:
+#             - name: MONGO_URL
+#               value: "mongodb+srv://emipereiro:Salu1805@cluster0.avxgn.mongodb.net/Backend3Final?retryWrites=true&w=majority&appName=Cluster0"  
+#             
+                        
+                          ###(crear el archivo .env y mandar la variable de entorno) clase del 5 de mayo 2:00hs###
+# ---
+# apiVersion: v1
+# kind: Service    
+# metadata:
+#   name: recursosbackend-adoptme-service
+# spec:
+#   selector:
+#     app: recursosbackend-adoptme
+#   ports:
+#     - protocol: TCP
+#       port: 80
+#       targetPort: 8080
+#   type: LoadBalancer                 
