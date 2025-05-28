@@ -1,0 +1,78 @@
+paths:
+  /api/pets:
+    get:
+      tags:
+        - Mascotas
+      summary: Obtiene todas las mascotas
+      responses:
+        "200":
+          description: Lista de mascotas obtenidas correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+        "500":
+          description: Error interno del servidor  
+    post:
+      tags:
+        - Mascotas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/createPet'
+      responses:
+        "201":
+          description: Mascota creada correctamente         
+        "400":
+          description: Error en la solicitud
+        "500":
+          description: Error interno del servidor          
+components:
+  schemas:
+    Pet:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID de la mascota generado por MongoDB
+        name:
+          type: string
+          description: Nombre de la mascota
+        specie:
+          type: string
+          description: Especie de la mascota
+        birthDate:
+          type: string
+          format: date
+          description: Fecha de nacimiento de la mascota
+        adopted:
+          type: boolean
+          description: Estado de adopción de la mascota
+      example: 
+        id: 1234567890abcdef12345678
+        name: "Firulais"
+        specie: "Perro"
+        birthDate: "2020-01-01"
+        adopted: false
+  requestBodies:
+    createPet:
+      type: object
+      properties:       
+        name:
+          type: string
+          description: Nombre de la mascota
+        specie:
+          type: string
+          description: Especie de la mascota
+        birthDate:
+          type: string
+          format: date
+          description: Fecha de nacimiento de la mascota
+      example: 
+        name: "Firulais"
+        specie: "Perro"
+        birthDate: "2020-01-01"

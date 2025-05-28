@@ -9,7 +9,8 @@
     "dev": "node --watch src/app.js",
     "test": "mocha test/user.test.js",
     "testChai": "mocha test/users.Chai.test.js",
-    "testSuper": "mocha test/Supertest.test.js"
+    "testSuper": "mocha test/Supertest.test.js",
+    "testSuperA": "mocha test/adoption.test.js"
   },
   "keywords": [],
   "author": "",
