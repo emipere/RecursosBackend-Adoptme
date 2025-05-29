@@ -30,6 +30,59 @@ describe("test dao usuarios", function() {
         const resultado = await this.adoptionDao.get();
         assert.strictEqual(Array.isArray(resultado), true);
     })
+
+      it("Debe crear una adopción correctamente", async function () {
+        const user = await this.userDao.save({
+          first_name: "oscar",
+          last_name: "poli",
+          email: "oscar@poli.com",
+          password: "1234",
+          pets: []
+        });
+    
+        const pet = await this.petDao.save({
+          name: "fed",
+          specie: "dog",
+          age: 8,
+          adopted: false
+        });
+    
+        const adoption = await this.adoptionDao.save({
+          owner: user._id,
+          pet: pet._id
+        });
+    
+        assert.ok(adoption._id);
+        assert.strictEqual(adoption.owner.toString(), user._id.toString());
+        assert.strictEqual(adoption.pet.toString(), pet._id.toString());
+      });
+
+      it("Debe obtener una adopción por ID", async function () {
+        const user = await this.userDao.save({
+          first_name: "lili",
+          last_name: "guli",
+          email: "lili@guli.com",
+          password: "1234",
+          pets: []
+        });
+    
+        const pet = await this.petDao.save({
+          name: "felipe",
+          specie: "cat",
+          age: 4,
+          adopted: false
+        });
+    
+        const adopcionCreada = await this.adoptionDao.save({
+          owner: user._id,
+          pet: pet._id
+        });
+    
+        const resultado = await this.adoptionDao.getBy({ _id: adopcionCreada._id });
+        assert.ok(resultado);
+        assert.strictEqual(resultado._id.toString(), adopcionCreada._id.toString());
+      });
+
 after(async function (){
           await mongoose.disconnect();
       })
