@@ -30,13 +30,10 @@ describe("test dao usuarios", function() {
         const resultado = await this.adoptionDao.get();
         assert.strictEqual(Array.isArray(resultado), true);
     })
-    
 after(async function (){
           await mongoose.disconnect();
       })
   })
-
-  
 
 
 
